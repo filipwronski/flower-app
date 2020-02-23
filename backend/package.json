@@ -1,0 +1,24 @@
+{
+  "name": "flower-app-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node -- src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-cli": "^7.0.0-beta.3",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.10.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
+  }
+}
