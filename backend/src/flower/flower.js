@@ -30,7 +30,7 @@ export default class Flower {
         } catch (error) {
             throw error;
         }
-        return `Flower with id: ${_id} deleted.`; 
+        return _id; 
     }
 
     async update({_id}, args) {
