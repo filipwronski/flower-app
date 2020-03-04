@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_FLOWER_LIST, DELETE_FLOWER } from '../graphql/schema';
-
+import { GET_FLOWER_LIST, DELETE_FLOWER } from '../../graphql/schema';
+import { Link } from "react-router-dom";
 
 export default function FlowerList() {
   const { loading, error, data } = useQuery(GET_FLOWER_LIST);
@@ -47,6 +47,7 @@ export default function FlowerList() {
             last watering: {lastWatering}
           </p>
           <button onClick={event => deleteFlower(_id)}>delete</button>
+          <Link to={`/update-flower/${_id}`}>edit</Link>
         </li>
       ))}
     </ul>

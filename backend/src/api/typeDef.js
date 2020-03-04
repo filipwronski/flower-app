@@ -26,12 +26,13 @@ export const typeDefs = gql`
   }
   type Query {
     flowerList: [Flower!]
+    flower(_id: ID): Flower!
     userList: [User!]
   }
   type Mutation {
     createFlower(flowerInput: FlowerInput): Flower
     deleteFlower(idInput: IdInput): String
-    updateFlower(idInput: IdInput, flowerInput: FlowerInput): String
+    updateFlower(idInput: IdInput, flowerInput: FlowerInput): Flower
     createUser(userInput: UserInput): User
   }
 `;

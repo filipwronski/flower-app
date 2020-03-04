@@ -4,8 +4,9 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import FlowerList from './components/FlowerList';
-import AddFlower from "./components/CreateFlower";
+import FlowerList from './components/flower/FlowerList';
+import AddFlower from "./components/flower/CreateFlower";
+import UpdateFlower from "./components/flower/UpdateFlower";
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +28,9 @@ const App = () => (
           <Switch>
             <Route path="/add-flower">
               <AddFlower/>
+            </Route>
+            <Route path="/update-flower/:flowerId">
+              <UpdateFlower/>
             </Route>
             <Route path="/">
               <FlowerList />

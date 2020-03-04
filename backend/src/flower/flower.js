@@ -11,6 +11,16 @@ export default class Flower {
         }
     }
 
+    async get(_id) {
+        console.log(_id)
+        try {
+            return await FlowerModel
+                .findById(_id)
+        } catch (err) {
+            throw err;
+        }
+    }
+
     async create ({ name, created, lastWatering, user }) {
         const flower = new FlowerModel({
             name,
@@ -35,10 +45,10 @@ export default class Flower {
 
     async update({_id}, args) {
         try {    
-            await FlowerModel.findOneAndUpdate({_id}, args);
+            const flower = await FlowerModel.findOneAndUpdate({_id}, args);
+            return flower
         } catch (error) {
             throw error;
         }
-        return `Flower with id: ${_id} updated.`; 
     }
 }

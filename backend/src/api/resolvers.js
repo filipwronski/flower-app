@@ -7,6 +7,7 @@ const user = new User();
 export const resolvers = {
     Query: {
         flowerList: () => flower.list(),
+        flower: (_, _id) => flower.get(_id),
         userList: () => user.list(),
     },
     Mutation: {
