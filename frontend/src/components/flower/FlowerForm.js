@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 export default function FlowerForm(props) {
-    const [name, setName] = useState('');
-    const [created, setCreated] = useState('');
-    const [lastWatering, setLastWatering] = useState('');
+    const [name, setName] = useState(props.defaultData.name);
+    const [created, setCreated] = useState(props.defaultData.created);
+    const [lastWatering, setLastWatering] = useState(props.defaultData.lastWatering);
  
     useEffect(() => {
         if (typeof props.defaultData !== 'undefined') {
@@ -11,7 +11,7 @@ export default function FlowerForm(props) {
             setCreated(props.defaultData.created)
             setLastWatering(props.defaultData.lastWatering)
         }
-    }, [props.defaultData]);
+    }, [props.defaultData, props.defaultData.name, props.defaultData.created, props.defaultData.lastWatering]);
 
     return (
         <form

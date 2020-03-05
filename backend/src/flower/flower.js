@@ -45,7 +45,7 @@ export default class Flower {
 
     async update({_id}, args) {
         try {    
-            const flower = await FlowerModel.findOneAndUpdate({_id}, args);
+            const flower = await FlowerModel.findOneAndUpdate({_id}, args, {new: true});
             return flower
         } catch (error) {
             throw error;

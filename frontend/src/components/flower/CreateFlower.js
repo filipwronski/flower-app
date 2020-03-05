@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_FLOWER } from '../../graphql/schema'
+import { CREATE_FLOWER, GET_FLOWER_LIST } from '../../graphql/schema'
 import FlowerForm from './FlowerForm'
 import Notification from '../Notification'
 
 export default function CreateFlower() {
   const [notification, setNotification] = useState('');
-  const [createFlower] = useMutation(CREATE_FLOWER);
+  const [name] = useState('')
+  const [created] = useState('')
+  const [lastWatering] = useState('')
+  const [createFlower] = useMutation(CREATE_FLOWER, {
+    update(cache, { data }) {
+      if(cache.data.data.GET_FLOWER_LIST) {
+        const cacheData = cache.readQuery({ query: GET_FLOWER_LIST });
+        cache.writeQuery({
+          query: GET_FLOWER_LIST,
+          data: {
+            flowerList: [data.createFlower, ...cacheData.flowerList]
+          },
+        });
+      }
+    }
+  });
 
-  const showNotification = (message, timeout) => {
-    setNotification(message)
-    setTimeout(() => {
-      setNotification('')
-    }, timeout);
-  }
-
-  const addFlower = ({
+  const createFlowerAction = ({
     name,
     created,
     lastWatering
@@ -28,7 +36,7 @@ export default function CreateFlower() {
         user: "5e51b618442f985567d66845"
       }
     }).then(({ data }) => {
-      showNotification(`Dodano pomyślnie kwiat o nazwie: ${data.createFlower.name}`, 5000)
+      setNotification(`Dodano pomyślnie kwiat o nazwie: ${data.createFlower.name}`)
     }).catch(error => {
       throw error;
     })
@@ -42,8 +50,9 @@ export default function CreateFlower() {
         />
       }
       <FlowerForm
-        formAction={addFlower}
+        formAction={createFlowerAction}
         buttonLabel="Add Flower"
+        defaultData={{name, created, lastWatering}}
       />
     </div>
   );
