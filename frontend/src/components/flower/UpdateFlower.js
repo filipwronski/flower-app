@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from "react-router-dom";
-import { UPDATE_FLOWER, GET_FLOWER, GET_FLOWER_LIST } from '../../graphql/schema'
+import { UPDATE_FLOWER, GET_FLOWER } from '../../infrastructure/graphql/flower/schema'
+import { updateFlower } from '../../infrastructure/graphql/flower'
 import FlowerForm from './FlowerForm'
 import Notification from '../Notification'
 
@@ -11,35 +12,17 @@ export default function UpdateFlower() {
     const [name, setName] = useState('')
     const [created, setCreated] = useState('')
     const [lastWatering, setLastWatering] = useState('')
-    const onFloweDataChange = (data) => {
+    const onFlowerDataChange = (data) => {
       setName(data.name)
       setCreated(data.created)
       setLastWatering(data.lastWatering)
     }
-    const [editFlower] = useMutation(UPDATE_FLOWER, {
-      update(cache, { data }) {
-        onFloweDataChange(data.updateFlower)
-        if(cache.data.data.GET_FLOWER_LIST) {
-          const cacheData = cache.readQuery({ query: GET_FLOWER_LIST });
-          cache.writeQuery({
-            query: GET_FLOWER_LIST,
-            data: {
-              flowerList: cacheData.flowerList.map((flower) => {
-                if(flower._id === data.updateFlower._id) {
-                  return data.updateFlower
-                }
-                return flower
-              })
-            },
-          });
-        }
-      }
-    });
+    const [editFlower] = useMutation(UPDATE_FLOWER, updateFlower);
     useQuery(GET_FLOWER,
       {
         variables: { id: flowerId },
         onCompleted: (data) => {
-          onFloweDataChange(data.flower)
+          onFlowerDataChange(data.flower)
         },
         onError: (error) => {
           throw error;
@@ -47,7 +30,7 @@ export default function UpdateFlower() {
       }
     );
 
-    const updateFlower = ({
+    const updateFlowerAction = ({
         name,
         created,
         lastWatering
@@ -61,6 +44,7 @@ export default function UpdateFlower() {
             user: "5e51b618442f985567d66845"
           }
         }).then(({ data }) => {
+          onFlowerDataChange(data.updateFlower)
           setNotification(`Zaktualizowano pomyślnie kwiat o nazwie: ${data.updateFlower.name}`)
           
         }).catch(error => {
@@ -77,7 +61,7 @@ export default function UpdateFlower() {
             />
           }
           <FlowerForm
-            formAction={updateFlower}
+            formAction={updateFlowerAction}
             buttonLabel="Update Flower"
             defaultData={{name, created, lastWatering}}
           />

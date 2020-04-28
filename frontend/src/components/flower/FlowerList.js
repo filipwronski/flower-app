@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_FLOWER_LIST, DELETE_FLOWER } from '../../graphql/schema';
+import { GET_FLOWER_LIST, DELETE_FLOWER } from '../../infrastructure/graphql/flower/schema';
 import { Link } from "react-router-dom";
 
 export default function FlowerList() {

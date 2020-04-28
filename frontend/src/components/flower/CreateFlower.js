@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_FLOWER, GET_FLOWER_LIST } from '../../graphql/schema'
+import { CREATE_FLOWER, GET_FLOWER_LIST } from '../../infrastructure/graphql/flower/schema'
 import FlowerForm from './FlowerForm'
 import Notification from '../Notification'
 
