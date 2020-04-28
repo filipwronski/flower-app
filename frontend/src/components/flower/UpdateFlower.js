@@ -20,7 +20,6 @@ export default function UpdateFlower() {
       update(cache, { data }) {
         onFloweDataChange(data.updateFlower)
         if(cache.data.data.GET_FLOWER_LIST) {
-          console.log(cache.readQuery({ query: GET_FLOWER_LIST }))
           const cacheData = cache.readQuery({ query: GET_FLOWER_LIST });
           cache.writeQuery({
             query: GET_FLOWER_LIST,
