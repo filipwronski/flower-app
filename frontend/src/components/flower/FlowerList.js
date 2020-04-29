@@ -1,27 +1,15 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_FLOWER_LIST, DELETE_FLOWER } from '../../infrastructure/graphql/flower/schema';
+import { deleteFlower } from '../../infrastructure/graphql/flower';
 import { Link } from "react-router-dom";
 
 export default function FlowerList() {
   const { loading, error, data } = useQuery(GET_FLOWER_LIST);
-  const [deleteFlowerAction] = useMutation(DELETE_FLOWER,
-    {
-      update(cache, { data }) {
-        const { flowerList } = cache.readQuery({ query: GET_FLOWER_LIST });
-        cache.writeQuery({
-          query: GET_FLOWER_LIST,
-          data: {
-            flowerList: flowerList.filter((flower) => {
-              return flower._id !== data.deleteFlower
-            })
-          },
-        });
-      }
-    });
+  const [deleteFlowerMutation] = useMutation(DELETE_FLOWER, deleteFlower);
 
-  const deleteFlower = (id) => {
-    deleteFlowerAction({
+  const deleteFlowerAction = (id) => {
+    deleteFlowerMutation({
       variables: {
         id
       }
@@ -46,7 +34,7 @@ export default function FlowerList() {
             created: {created}<br />
             last watering: {lastWatering}
           </p>
-          <button onClick={event => deleteFlower(_id)}>delete</button>
+          <button onClick={event => deleteFlowerAction(_id)}>delete</button>
           <Link to={`/update-flower/${_id}`}>edit</Link>
         </li>
       ))}

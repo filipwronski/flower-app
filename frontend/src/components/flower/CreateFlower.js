@@ -1,34 +1,23 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_FLOWER, GET_FLOWER_LIST } from '../../infrastructure/graphql/flower/schema'
+import { CREATE_FLOWER } from '../../infrastructure/graphql/flower/schema'
 import FlowerForm from './FlowerForm'
 import Notification from '../Notification'
+import { createFlower } from '../../infrastructure/graphql/flower'
 
 export default function CreateFlower() {
   const [notification, setNotification] = useState('');
   const [name] = useState('')
   const [created] = useState('')
   const [lastWatering] = useState('')
-  const [createFlower] = useMutation(CREATE_FLOWER, {
-    update(cache, { data }) {
-      if(cache.data.data.GET_FLOWER_LIST) {
-        const cacheData = cache.readQuery({ query: GET_FLOWER_LIST });
-        cache.writeQuery({
-          query: GET_FLOWER_LIST,
-          data: {
-            flowerList: [data.createFlower, ...cacheData.flowerList]
-          },
-        });
-      }
-    }
-  });
+  const [createFlowerMutation] = useMutation(CREATE_FLOWER, createFlower);
 
   const createFlowerAction = ({
     name,
     created,
     lastWatering
   }) => {
-    createFlower({
+    createFlowerMutation({
       variables: {
         name,
         created,
