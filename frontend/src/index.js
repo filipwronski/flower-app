@@ -5,14 +5,15 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import FlowerList from './components/flower/FlowerList';
-import AddFlower from "./components/flower/CreateFlower";
-import UpdateFlower from "./components/flower/UpdateFlower";
+import AddFlower from "./views/CreateFlower";
+import UpdateFlower from "./views/UpdateFlower";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Navigation from './components/Navigation'
+import BottomBar from './components/layout/BottomBar';
+import HomeView from './views/Home';
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
@@ -21,22 +22,22 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <div>
-      <h2>Flower APP</h2>
       <Router>
-        <Navigation/>
-        <div>
-          <Switch>
-            <Route path="/add-flower">
-              <AddFlower/>
-            </Route>
-            <Route path="/update-flower/:flowerId">
-              <UpdateFlower/>
-            </Route>
-            <Route path="/">
-              <FlowerList />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/add-flower">
+            <AddFlower/>
+          </Route>
+          <Route path="/update-flower/:flowerId">
+            <UpdateFlower/>
+          </Route>
+          <Route path="/flower-list">
+            <FlowerList />
+          </Route>
+          <Route path="/">
+            <HomeView />
+          </Route>
+        </Switch>
+        <BottomBar/>
       </Router>
     </div>
   </ApolloProvider>

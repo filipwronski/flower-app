@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from "react-router-dom";
-import { UPDATE_FLOWER, GET_FLOWER } from '../../infrastructure/graphql/flower/schema'
-import { updateFlower } from '../../infrastructure/graphql/flower'
-import FlowerForm from './FlowerForm'
-import Notification from '../Notification'
+import { UPDATE_FLOWER, GET_FLOWER } from '../infrastructure/graphql/flower/schema'
+import { updateFlower } from '../infrastructure/graphql/flower'
+import FlowerForm from '../components/flower/FlowerForm'
+import Notification from '../components/layout/Notification'
 
 export default function UpdateFlower() {
     let { flowerId } = useParams();

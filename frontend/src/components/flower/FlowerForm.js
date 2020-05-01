@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import BasicTextField from '../input/BasicTextField'
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 export default function FlowerForm(props) {
     const [name, setName] = useState(props.defaultData.name);
@@ -13,6 +16,20 @@ export default function FlowerForm(props) {
         }
     }, [props.defaultData, props.defaultData.name, props.defaultData.created, props.defaultData.lastWatering]);
 
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            paddingLeft: theme.spacing(1),
+            paddingRight: theme.spacing(1),
+        },
+        margin: {
+            paddingBottom: theme.spacing(1),
+        },
+        textField: {
+            width: '100%',
+        },
+    }));
+    const classes = useStyles();
+
     return (
         <form
             onSubmit={event => {
@@ -23,20 +40,27 @@ export default function FlowerForm(props) {
                     lastWatering,
                 })
             }}
-        >
-            <input
-                value={name} onChange={event => setName(event.target.value)}
-                placeholder="name"
+            className={classes.root}
+        >   
+            <BasicTextField
+                className={clsx(classes.margin, classes.textField)}
+                value={name}
+                onChange={event => setName(event.target.value)}
+                label="name"
             />
-            <input
-                value={created} onChange={event => setCreated(event.target.value)}
-                placeholder="created"
+            <BasicTextField
+                className={clsx(classes.margin, classes.textField)}
+                value={created}
+                onChange={event => setCreated(event.target.value)}
+                label="created"
             />
-            <input
-                value={lastWatering} onChange={event => setLastWatering(event.target.value)}
-                placeholder="last watering"
+            <BasicTextField
+                className={clsx(classes.margin, classes.textField)}
+                value={lastWatering}
+                onChange={event => setLastWatering(event.target.value)}
+                label="last watering"
             />
-            <button type="submit">{props.buttonLabel}</button>
+            {props.submitButton}
         </form>
     );
 }

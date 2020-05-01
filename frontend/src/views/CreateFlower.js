@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_FLOWER } from '../../infrastructure/graphql/flower/schema'
-import FlowerForm from './FlowerForm'
-import Notification from '../Notification'
-import { createFlower } from '../../infrastructure/graphql/flower'
+import { CREATE_FLOWER } from '../infrastructure/graphql/flower/schema'
+import FlowerForm from '../components/flower/FlowerForm'
+import Notification from '../components/layout/Notification'
+import { createFlower } from '../infrastructure/graphql/flower'
+import PrimaryButton from '../components/button/PrimaryButton'
+import TopBar from '../components/layout/TopBar';
+import ContentBox from '../components/layout/ContentBox';
 
 export default function CreateFlower() {
   const [notification, setNotification] = useState('');
@@ -32,17 +35,26 @@ export default function CreateFlower() {
   }
 
   return (
-    <div>
+    <React.Fragment>
+      <TopBar
+        title="Add Flower"
+      />
       {notification &&
         <Notification
           content={notification}
         />
       }
-      <FlowerForm
-        formAction={createFlowerAction}
-        buttonLabel="Add Flower"
-        defaultData={{name, created, lastWatering}}
-      />
-    </div>
+      <ContentBox>
+        <FlowerForm
+          formAction={createFlowerAction}
+          submitButton={
+            <PrimaryButton>
+              Submit
+            </PrimaryButton>
+          }
+          defaultData={{name, created, lastWatering}}
+        />
+      </ContentBox>
+    </React.Fragment>
   );
 }
