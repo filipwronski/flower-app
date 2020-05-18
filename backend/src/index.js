@@ -12,12 +12,12 @@ const startServer = async () => {
     server.applyMiddleware({ app });
 
     try {
-        await mongoose.connect(process.env.MONGO_URL, {
+        await mongoose.connect('mongodb+srv://filip2:filip2@cluster0-ncdt1.mongodb.net/flower-app?retryWrites=true&w=majority', {
             useUnifiedTopology: true,
             useNewUrlParser: true,
         })
     } catch (error) {
-        throw 'test'
+        throw error
     }
     app.listen({ port: 4000 }, () =>
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)

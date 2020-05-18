@@ -4,7 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import FlowerList from './components/flower/FlowerList';
+import FlowerList from './views/FlowerList';
 import AddFlower from "./views/CreateFlower";
 import UpdateFlower from "./views/UpdateFlower";
 import {
