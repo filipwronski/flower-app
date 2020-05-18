@@ -17,7 +17,7 @@ const startServer = async () => {
             useNewUrlParser: true,
         })
     } catch (error) {
-        throw 'test'
+        throw error
     }
     app.listen({ port: 4000 }, () =>
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
