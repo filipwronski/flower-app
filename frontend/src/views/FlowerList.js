@@ -1,16 +1,17 @@
 import React from 'react'
 import TopBar from '../components/layout/TopBar';
 import ContentBox from '../components/layout/ContentBox';
+import FlowerList from '../components/flower/List'
 import BottomBar from '../components/layout/BottomBar';
 
-export default function HomeView() {
+export default function FlowerListView() {
     return (
         <React.Fragment>
             <TopBar
-                title="Home"
+                title="Flower List"
             />
             <ContentBox>
-                <p>test</p>
+                <FlowerList/>
             </ContentBox>
             <BottomBar/>
         </React.Fragment>

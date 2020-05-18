@@ -7,6 +7,8 @@ import { createFlower } from '../infrastructure/graphql/flower'
 import PrimaryButton from '../components/button/PrimaryButton'
 import TopBar from '../components/layout/TopBar';
 import ContentBox from '../components/layout/ContentBox';
+import BottomBar from '../components/layout/BottomBar';
+import WebcamCapture from '../components/layout/WebcamCapture';
 
 export default function CreateFlower() {
   const [notification, setNotification] = useState('');
@@ -34,6 +36,10 @@ export default function CreateFlower() {
     })
   }
 
+  const onImageUpload = (imageSrc) => {
+    alert(imageSrc)
+  }
+
   return (
     <React.Fragment>
       <TopBar
@@ -45,6 +51,7 @@ export default function CreateFlower() {
         />
       }
       <ContentBox>
+        <WebcamCapture onImageUpload={onImageUpload} />
         <FlowerForm
           formAction={createFlowerAction}
           submitButton={
@@ -55,6 +62,7 @@ export default function CreateFlower() {
           defaultData={{name, created, lastWatering}}
         />
       </ContentBox>
+      <BottomBar/>
     </React.Fragment>
   );
 }

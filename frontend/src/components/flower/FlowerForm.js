@@ -17,10 +17,6 @@ export default function FlowerForm(props) {
     }, [props.defaultData, props.defaultData.name, props.defaultData.created, props.defaultData.lastWatering]);
 
     const useStyles = makeStyles((theme) => ({
-        root: {
-            paddingLeft: theme.spacing(1),
-            paddingRight: theme.spacing(1),
-        },
         margin: {
             paddingBottom: theme.spacing(1),
         },
