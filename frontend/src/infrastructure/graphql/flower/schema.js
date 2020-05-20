@@ -57,3 +57,12 @@ export const GET_FLOWER = gql`
       }
   }
 `;
+
+  export const UPLOAD_FILE = gql`
+  mutation($file: Upload!) {
+    singleUpload(file: $file) {
+      filename
+    }
+  }
+  `;
+  

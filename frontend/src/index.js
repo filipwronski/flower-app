@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createUploadLink } from 'apollo-upload-client';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import ApolloClient from 'apollo-boost';
+import ApolloClient from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import FlowerList from './views/FlowerList';
 import AddFlower from "./views/CreateFlower";
@@ -14,8 +16,10 @@ import {
 } from "react-router-dom";
 import HomeView from './views/Home';
 
+
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    cache: new InMemoryCache(),
+    link: createUploadLink({  uri: "http://localhost:4000/graphql" }),
 });
 
 function App () {

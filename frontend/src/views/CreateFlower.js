@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_FLOWER } from '../infrastructure/graphql/flower/schema'
+import { CREATE_FLOWER, UPLOAD_FILE } from '../infrastructure/graphql/flower/schema'
 import FlowerForm from '../components/flower/FlowerForm'
 import Notification from '../components/layout/Notification'
 import { createFlower } from '../infrastructure/graphql/flower'
@@ -16,6 +16,7 @@ export default function CreateFlower() {
   const [created] = useState('')
   const [lastWatering] = useState('')
   const [createFlowerMutation] = useMutation(CREATE_FLOWER, createFlower);
+  const [mutate] = useMutation(UPLOAD_FILE);
 
   const createFlowerAction = ({
     name,
@@ -36,8 +37,13 @@ export default function CreateFlower() {
     })
   }
 
-  const onImageUpload = (imageSrc) => {
-    alert(imageSrc)
+  const onChange = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }) => {
+    if (validity.valid) mutate({ variables: { file } });
   }
 
   return (
@@ -51,7 +57,8 @@ export default function CreateFlower() {
         />
       }
       <ContentBox>
-        <WebcamCapture onImageUpload={onImageUpload} />
+        <WebcamCapture onImageUpload={onChange} />
+        <input type="file" required onChange={onChange} />
         <FlowerForm
           formAction={createFlowerAction}
           submitButton={

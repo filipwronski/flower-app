@@ -24,15 +24,22 @@ export const typeDefs = gql`
   input UserInput {
     name: String!
   }
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
   type Query {
     flowerList: [Flower!]
     flower(_id: ID): Flower!
     userList: [User!]
+    files: [File]
   }
   type Mutation {
     createFlower(flowerInput: FlowerInput): Flower
     deleteFlower(idInput: IdInput): String
     updateFlower(idInput: IdInput, flowerInput: FlowerInput): Flower
     createUser(userInput: UserInput): User
+    singleUpload(file: Upload!): File!
   }
 `;

@@ -1,7 +1,6 @@
 import React from 'react'
 import Webcam from "react-webcam";
 import { Button, makeStyles } from '@material-ui/core';
-import { display } from '@material-ui/system';
 
 const videoConstraints = {
     width: 720,
