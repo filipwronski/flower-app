@@ -19,7 +19,10 @@ import HomeView from './views/Home';
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: createUploadLink({  uri: "http://localhost:4000/graphql" }),
+    link: createUploadLink({
+        uri: "https://192.168.0.73:4000/graphql",
+        credentials: 'include',
+    }),
 });
 
 function App () {
