@@ -37,7 +37,7 @@ export default function ListItem(props) {
             <CardActionArea>
                 <CardMedia
                 className={classes.media}
-                image="https://images.unsplash.com/photo-1488181663498-e4519ab2d1bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
+                image={`https://192.168.0.73:4000/flower/images/${props.imageName}`}
                 title="Contemplative Reptile"
                 />
                 <CardContent>

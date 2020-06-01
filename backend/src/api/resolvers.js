@@ -10,20 +10,16 @@ export const resolvers = {
         flowerList: () => flower.list(),
         flower: (_, _id) => flower.get(_id),
         userList: () => user.list(),
-        files: () => {
-            // Return the record of files uploaded from your DB or API or filesystem.
-        }
     },
     Mutation: {
         createFlower: (_, { flowerInput }) => flower.create(flowerInput),
         deleteFlower: (_, { idInput }) => flower.delete(idInput),
         updateFlower: (_, { idInput, flowerInput }) => flower.update(idInput, flowerInput),
         createUser: (_, userInput) => user.create(userInput),
-        async singleUpload(parent, { file }) {
-            const { stream, filename, mimetype, encoding } = await file;
-            console.log(stream)
-            const uploadDir = './uploads';
-            const path = `${uploadDir}/${filename}`;
+        async singleImageUpload(parent, { image, imageName }) {
+            const { stream, mimetype, encoding } = await image;
+            const uploadDir = './public/flower/images';
+            const path = `${uploadDir}/${imageName}`;
             return new Promise((resolve, reject) =>
                 stream
                 .on('error', error => {
@@ -35,7 +31,11 @@ export const resolvers = {
                 .pipe(fs.createWriteStream(path))
                 .on('error', error => reject(error))
                 .on('finish', () => resolve(
-                    {filename, mimetype, encoding}
+                    {
+                        filename: imageName,
+                        mimetype,
+                        encoding
+                    }
                 ))
             );
           }

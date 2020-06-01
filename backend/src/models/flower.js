@@ -9,7 +9,8 @@ const flowerSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    imageName: String,
 })
 
 export default mongoose.model('Flower', flowerSchema);

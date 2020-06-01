@@ -10,8 +10,9 @@ export default function FlowerList() {
 
   return (
     <div>
-      {data.flowerList.map(({ _id, name}) => (
+      {data.flowerList.map(({ _id, name, imageName}) => (
         <ListItem
+          imageName={imageName}
           name={name}
           id={_id}
           key={_id}

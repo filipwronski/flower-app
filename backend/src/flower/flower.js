@@ -21,12 +21,13 @@ export default class Flower {
         }
     }
 
-    async create ({ name, created, lastWatering, user }) {
+    async create ({ name, created, lastWatering, user, imageName }) {
         const flower = new FlowerModel({
             name,
             created,
             lastWatering,
             user,
+            imageName
         })
         await flower.save();
 

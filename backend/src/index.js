@@ -25,6 +25,7 @@ const startServer = async () => {
     });
 
     app.use(cors(corsConfig));  
+    app.use(express.static('./public'));
     app.post('/upload-image', photoUpload.any('file'), (req, res) => {
         try {
             res.send(req.file);

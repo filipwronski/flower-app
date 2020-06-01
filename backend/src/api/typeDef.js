@@ -7,12 +7,14 @@ export const typeDefs = gql`
     created: String!
     lastWatering: String!
     user: User
+    imageName: String
   }
   input FlowerInput {
     name: String
     created: String
     lastWatering: String
     user: String
+    imageName: String
   }
   input IdInput {
     _id: ID
@@ -40,6 +42,6 @@ export const typeDefs = gql`
     deleteFlower(idInput: IdInput): String
     updateFlower(idInput: IdInput, flowerInput: FlowerInput): Flower
     createUser(userInput: UserInput): User
-    singleUpload(file: Upload!): File!
+    singleImageUpload(image: Upload!, imageName: String): File!
   }
 `;

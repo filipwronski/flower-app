@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BasicTextField from '../input/BasicTextField'
 import { makeStyles } from '@material-ui/core/styles';
+import DateInput from '../input/DateInput.js'
 import clsx from 'clsx';
 
 export default function FlowerForm(props) {
@@ -44,18 +45,31 @@ export default function FlowerForm(props) {
                 onChange={event => setName(event.target.value)}
                 label="name"
             />
-            <BasicTextField
+            {/* <BasicTextField
                 className={clsx(classes.margin, classes.textField)}
                 value={created}
                 onChange={event => setCreated(event.target.value)}
                 label="created"
-            />
-            <BasicTextField
+            /> */}
+            <div>   
+                <DateInput
+                    className={clsx(classes.textField)}
+                    onChange={created => setCreated(created)}
+                />
+            </div>
+            <div>
+                <DateInput
+                    className={clsx(classes.textField)}
+                    onChange={created => setLastWatering(created)}
+                />  
+            </div>
+               
+            {/* <BasicTextField
                 className={clsx(classes.margin, classes.textField)}
                 value={lastWatering}
                 onChange={event => setLastWatering(event.target.value)}
                 label="last watering"
-            />
+            /> */}
             {props.submitButton}
         </form>
     );
