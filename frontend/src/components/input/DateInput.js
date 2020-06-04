@@ -21,7 +21,7 @@ export default function DateInput(props) {
         margin="normal"
         id="date-picker-dialog"
         className={props.className}
-        label="Date picker dialog"
+        label={props.label}
         format="MM/dd/yyyy"
         value={selectedDate}
         onChange={handleDateChange}

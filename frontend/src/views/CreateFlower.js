@@ -8,9 +8,18 @@ import PrimaryButton from '../components/button/PrimaryButton'
 import TopBar from '../components/layout/TopBar';
 import ContentBox from '../components/layout/ContentBox';
 import BottomBar from '../components/layout/BottomBar';
-import WebcamCapture from '../components/layout/WebcamCapture';
+import ImageUploadButton from '../components/button/ImageUploadButton';
+import { makeStyles } from '@material-ui/styles';
+import ImageForm from '../components/layout/ImageForm';
+
+const useStyles = makeStyles({
+  button: {
+    marginBottom: 8
+  },
+});
 
 export default function CreateFlower() {
+  const classes = useStyles();
   const [notification, setNotification] = useState('');
   const [name] = useState('')
   const [created] = useState('')
@@ -41,40 +50,13 @@ export default function CreateFlower() {
     })
   }
 
-  const onChange = ({
-    target: {
-      validity,
-      files: [image],
-    },
-  }) => {
+  const onImageSelect = (image, validity) => {
     console.log(validity.valid)
     if (validity.valid) {
       setImageName(`flower-${Date.now() + '-' + Math.round(Math.random() * 1E9)}.jpg`)
       setImage(image)
     }
   }
-
-  // const submitForm = (contentType, data, setResponse) => {
-  //   axios({
-  //     url: `https://192.168.0.73:4000/upload-image`,
-  //     method: 'POST',
-  //     data: data,
-  //     headers: {
-  //       'Content-Type': contentType
-  //     }
-  //   }).then((response) => {
-  //     setResponse(response.data);
-  //   }).catch((error) => {
-  //     setResponse("error");
-  //   })
-  // }
-
-  // const uploadWithFormData = () => {
-  //   const formData = new FormData();
-  //   formData.append("file", image);
-   
-  //   submitForm("multipart/form-data", formData, (msg) => console.log(msg));
-  //   }
 
   return (
     <React.Fragment>
@@ -87,12 +69,14 @@ export default function CreateFlower() {
         />
       }
       <ContentBox>
-        <WebcamCapture onImageUpload={onChange} />
-        <input type="file" required onChange={onChange} />
-        {/* <form>
-          <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
-          <input type="button" value="Upload as Form" onClick={uploadWithFormData} />
-        </form> */}
+        <ImageForm  onImageSelect={onImageSelect}/>
+        {/* <ImageUploadButton
+          className={classes.button}
+          onImageSelect={onImageSelect}
+        >
+          Add Photo
+        </ImageUploadButton> */}
+        {/* <input type="file" required onChange={onChange} /> */}
         <FlowerForm
           formAction={createFlowerAction}
           submitButton={

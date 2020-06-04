@@ -53,14 +53,18 @@ export default function FlowerForm(props) {
             /> */}
             <div>   
                 <DateInput
+                    label="Created date"
                     className={clsx(classes.textField)}
-                    onChange={created => setCreated(created)}
+                    variant="outlined"
+                    onChange={date => setCreated(date)}
                 />
             </div>
             <div>
                 <DateInput
+                    label="Last watering date"
                     className={clsx(classes.textField)}
-                    onChange={created => setLastWatering(created)}
+                    variant="outlined"
+                    onChange={date => setLastWatering(date)}
                 />  
             </div>
                
