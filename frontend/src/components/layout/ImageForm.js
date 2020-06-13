@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { makeStyles } from '@material-ui/styles';
 import ImageUploadButton from '../button/ImageUploadButton';
+import ImageUploadPreview from '../image-upload-preview/ImageUploadPreview';
 
 const useStyles = makeStyles({
   button: {
@@ -27,20 +28,25 @@ export default function ImageForm(props) {
   }
 
   const removeImage = () => {
+    console.log('test')
     setImageSrc(null)
   }
 
   return (
     <React.Fragment>
-      {imageSrc!==null &&
-        <React.Fragment>
-          <button onClick={removeImage}>remove</button>
-          <img src={imageSrc} />
-        </React.Fragment>
-      }
-      <ImageUploadButton className={classes.button} onImageSelect={onImageSelect}>
-        Add Photo
-      </ImageUploadButton>
+      {imageSrc!==null
+        ? <ImageUploadPreview
+          removeImage={removeImage}
+          imageSrc={imageSrc}
+        />
+        : <ImageUploadButton
+          className={classes.button}
+          onImageSelect={onImageSelect}
+        >
+          Add Photo
+        </ImageUploadButton>
+    }
+      
     </React.Fragment>
   )
 }

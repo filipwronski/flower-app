@@ -7,7 +7,7 @@ import { deleteFlower } from '../../infrastructure/graphql/flower';
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 345,
+      maxWidth: '100%',
       margin: 10,
     },
     media: {

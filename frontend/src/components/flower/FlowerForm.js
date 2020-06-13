@@ -45,12 +45,6 @@ export default function FlowerForm(props) {
                 onChange={event => setName(event.target.value)}
                 label="name"
             />
-            {/* <BasicTextField
-                className={clsx(classes.margin, classes.textField)}
-                value={created}
-                onChange={event => setCreated(event.target.value)}
-                label="created"
-            /> */}
             <div>   
                 <DateInput
                     label="Created date"
@@ -67,13 +61,6 @@ export default function FlowerForm(props) {
                     onChange={date => setLastWatering(date)}
                 />  
             </div>
-               
-            {/* <BasicTextField
-                className={clsx(classes.margin, classes.textField)}
-                value={lastWatering}
-                onChange={event => setLastWatering(event.target.value)}
-                label="last watering"
-            /> */}
             {props.submitButton}
         </form>
     );

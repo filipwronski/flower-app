@@ -8,18 +8,9 @@ import PrimaryButton from '../components/button/PrimaryButton'
 import TopBar from '../components/layout/TopBar';
 import ContentBox from '../components/layout/ContentBox';
 import BottomBar from '../components/layout/BottomBar';
-import ImageUploadButton from '../components/button/ImageUploadButton';
-import { makeStyles } from '@material-ui/styles';
 import ImageForm from '../components/layout/ImageForm';
 
-const useStyles = makeStyles({
-  button: {
-    marginBottom: 8
-  },
-});
-
 export default function CreateFlower() {
-  const classes = useStyles();
   const [notification, setNotification] = useState('');
   const [name] = useState('')
   const [created] = useState('')

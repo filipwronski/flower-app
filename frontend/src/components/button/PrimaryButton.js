@@ -7,7 +7,13 @@ export default function PrimaryButton(props) {
     
     return (
         <ThemeProvider theme={ basicTheme }>
-            <Button variant="contained" color="primary" type="submit">
+            <Button 
+                variant="contained"
+                className={props.className}
+                onClick={props.onClick}
+                color="primary"
+                type="submit"
+            >
                 {props.children}
             </Button>
         </ThemeProvider>
