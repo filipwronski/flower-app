@@ -37,7 +37,7 @@ export default function ListItem(props) {
             <CardActionArea>
                 <CardMedia
                 className={classes.media}
-                image={`https://192.168.0.73:4000/flower/images/${props.imageName}`}
+                image={`https://192.168.8.73:4000/flower/images/${props.imageName}`}
                 title="Contemplative Reptile"
                 />
                 <CardContent>

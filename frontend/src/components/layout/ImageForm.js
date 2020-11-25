@@ -5,7 +5,8 @@ import ImageUploadPreview from '../image-upload-preview/ImageUploadPreview';
 
 const useStyles = makeStyles({
   button: {
-    marginBottom: 8
+    marginBottom: 8,
+    width: '100%'
   }
 })
 

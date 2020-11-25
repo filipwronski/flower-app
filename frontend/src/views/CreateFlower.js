@@ -8,22 +8,29 @@ import PrimaryButton from '../components/button/PrimaryButton'
 import TopBar from '../components/layout/TopBar';
 import ContentBox from '../components/layout/ContentBox';
 import BottomBar from '../components/layout/BottomBar';
-import ImageForm from '../components/layout/ImageForm';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  button: {
+    width: '100%'
+  }
+})
 
 export default function CreateFlower() {
+  const classes = useStyles();
   const [notification, setNotification] = useState('');
   const [name] = useState('')
   const [created] = useState('')
   const [lastWatering] = useState('')
   const [createFlowerMutation] = useMutation(CREATE_FLOWER, createFlower);
   // const [mutate] = useMutation(UPLOAD_FILE);
-  const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState(null);
 
   const createFlowerAction = ({
     name,
     created,
-    lastWatering
+    lastWatering,
+    image,
+    imageName
   }) => {
     createFlowerMutation({
       variables: {
@@ -41,13 +48,7 @@ export default function CreateFlower() {
     })
   }
 
-  const onImageSelect = (image, validity) => {
-    console.log(validity.valid)
-    if (validity.valid) {
-      setImageName(`flower-${Date.now() + '-' + Math.round(Math.random() * 1E9)}.jpg`)
-      setImage(image)
-    }
-  }
+  
 
   return (
     <React.Fragment>
@@ -60,18 +61,10 @@ export default function CreateFlower() {
         />
       }
       <ContentBox>
-        <ImageForm  onImageSelect={onImageSelect}/>
-        {/* <ImageUploadButton
-          className={classes.button}
-          onImageSelect={onImageSelect}
-        >
-          Add Photo
-        </ImageUploadButton> */}
-        {/* <input type="file" required onChange={onChange} /> */}
         <FlowerForm
           formAction={createFlowerAction}
           submitButton={
-            <PrimaryButton>
+            <PrimaryButton className={classes.button}>
               Submit
             </PrimaryButton>
           }
