@@ -11,6 +11,13 @@ const flowerSchema = new Schema({
         ref: 'User'
     },
     imageName: String,
+    room: {
+        type: Schema.Types.ObjectId,
+        ref: 'Room'
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+    }
 })
 
 export default mongoose.model('Flower', flowerSchema);

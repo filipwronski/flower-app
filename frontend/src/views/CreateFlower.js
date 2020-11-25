@@ -23,7 +23,6 @@ export default function CreateFlower() {
   const [created] = useState('')
   const [lastWatering] = useState('')
   const [createFlowerMutation] = useMutation(CREATE_FLOWER, createFlower);
-  // const [mutate] = useMutation(UPLOAD_FILE);
 
   const createFlowerAction = ({
     name,

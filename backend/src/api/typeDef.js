@@ -9,6 +9,14 @@ export const typeDefs = gql`
     user: User
     imageName: String
   }
+  type FlowerCategory {
+    _id: ID!
+    name: String!
+  }
+  type Room {
+    _id: ID!
+    name: String!
+  }
   input FlowerInput {
     name: String
     created: String
@@ -16,6 +24,7 @@ export const typeDefs = gql`
     user: String
     imageName: String
   }
+
   input IdInput {
     _id: ID
   }
@@ -24,6 +33,12 @@ export const typeDefs = gql`
     name: String
   }
   input UserInput {
+    name: String!
+  }
+  input FlowerCategoryInput {
+    name: String!
+  }
+  input RoomInput {
     name: String!
   }
   type File {
@@ -36,6 +51,8 @@ export const typeDefs = gql`
     flower(_id: ID): Flower!
     userList: [User!]
     files: [File]
+    flowerCategoryList: [Flower!]
+    roomList: [Flower!]
   }
   type Mutation {
     createFlower(flowerInput: FlowerInput): Flower
@@ -43,5 +60,7 @@ export const typeDefs = gql`
     updateFlower(idInput: IdInput, flowerInput: FlowerInput): Flower
     createUser(userInput: UserInput): User
     singleImageUpload(image: Upload!, imageName: String): File!
+    createFlowerCategory(flowerCategoryInput: FlowerCategoryInput): FlowerCategory
+    createRoom(roomInput: RoomInput!): Room
   }
 `;
