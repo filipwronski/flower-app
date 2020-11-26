@@ -11,7 +11,7 @@ export const typeDefs = gql`
   }
   type FlowerCategory {
     _id: ID!
-    name: String!
+    name: String
   }
   type Room {
     _id: ID!
@@ -51,8 +51,8 @@ export const typeDefs = gql`
     flower(_id: ID): Flower!
     userList: [User!]
     files: [File]
-    flowerCategoryList: [Flower!]
-    roomList: [Flower!]
+    flowerCategoryList: [Flower]
+    roomList: [Flower]
   }
   type Mutation {
     createFlower(flowerInput: FlowerInput): Flower

@@ -5,6 +5,8 @@ import DateInput from '../input/DateInput.js'
 import clsx from 'clsx';
 import Combobox from '../input/BasicCombobox';
 import ImageForm from '../layout/ImageForm';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GET_FLOWER_CATEGORY_LIST } from '../../infrastructure/graphql/flower-category/schema';
 
 
 export default function FlowerForm(props) {
@@ -22,17 +24,20 @@ export default function FlowerForm(props) {
     const [lastWatering, setLastWatering] = useState(props.defaultData.lastWatering);
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState(null);
-    const flowerCategoryList = [
-        {
-            value: 'test1'
-        },
-        {
-            value: 'test2'
-        },
-        {
-            value: 'test3'
+    const [ flowerCategoryList, setFlowerCategoryList] = useState([]);
+
+    const [
+        getFlowerCategoryList,
+        { called, data, loading, error },
+      ] = useLazyQuery(GET_FLOWER_CATEGORY_LIST, {
+        variables: {},
+        fetchPolicy: 'network-only',
+        onCompleted: (data) => {
+            setFlowerCategoryList(data.flowerCategoryList)
         }
-    ]
+      });
+    
+
 
     const onImageSelect = (image, validity) => {
         console.log(validity.valid)
@@ -43,6 +48,7 @@ export default function FlowerForm(props) {
       }
  
     useEffect(() => {
+        getFlowerCategoryList()
         if (typeof props.defaultData !== 'undefined') {
             setName(props.defaultData.name)
             setCreated(props.defaultData.created)

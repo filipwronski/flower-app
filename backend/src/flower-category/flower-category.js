@@ -2,7 +2,6 @@ import FlowerCategoryModel from '../models/flower-category';
 
 export default class FlowerCategory {
     async create ({name}) {
-        console.log(name)
         const flowerCategory = new FlowerCategoryModel({
             name
         });

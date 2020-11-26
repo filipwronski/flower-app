@@ -15,14 +15,14 @@ export default function Combobox(props) {
   const [selectedValue, setSelectedValue] = React.useState(null);
   
   const isInSuggestions = (value) => {
-    return props.data.find((suggestion) => suggestion.value === value)
+    return props.data.find((suggestion) => suggestion.name === value)
   }
 
   const getSuggestionListWithNewSuggestion = (suggestionList, inputValue) =>  {
     if (inputValue !== '' && !isInSuggestions(inputValue)) {
       suggestionList.push({
         inputValue,
-        value: `${props.newValuePrefix} "${inputValue}"`,
+        name: `${props.newValuePrefix} "${inputValue}"`,
       });
     }
 
@@ -39,7 +39,7 @@ export default function Combobox(props) {
           return suggestion.inputValue;
         }
         // Regular option
-        return suggestion.value;
+        return suggestion.name;
   }
 
   const getSuggestionList = (options, params) => {
@@ -52,11 +52,11 @@ export default function Combobox(props) {
   const onChange = (newValue) =>  {
     if (typeof newValue === 'string') {
       setSelectedValue({
-        value: newValue,
+        name: newValue,
       });
     } else if (newValue && newValue.inputValue) {
       setSelectedValue({
-        value: newValue.inputValue,
+        name: newValue.inputValue,
       });
     } else {
       setSelectedValue(newValue);
@@ -79,7 +79,7 @@ export default function Combobox(props) {
       id="free-solo-with-text-demo"
       options={props.data}
       getOptionLabel={(suggestion) => getSuggestionLabel(suggestion)}
-      renderOption={(suggestion) => suggestion.value}
+      renderOption={(suggestion) => suggestion.name}
       freeSolo
       renderInput={(params) => (  
         <TextField {...params} label={props.label} variant="outlined" />
