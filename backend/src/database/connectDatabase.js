@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 export const connectDatabase = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL, {
+        await mongoose.connect('mongodb://mongodb:27017/flower-app', {
             useUnifiedTopology: true,
             useNewUrlParser: true,
         })
     } catch (error) {
-        throw error
+        console.log(error)
     }
 }
